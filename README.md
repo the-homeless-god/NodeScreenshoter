@@ -1,5 +1,5 @@
 # NodeScreenshoter
-Tool for take screenshot of each node on webpage
+Tool for take screenshot of each visible node on webpage
 
 Requirements :
 
