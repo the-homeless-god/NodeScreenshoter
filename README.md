@@ -8,9 +8,9 @@ Requirements :
 
 Executing :
 
-1. Git clone
-2. Npm install puppeteer
-3. Node screenshoter.js
+1. git clone https://github.com/Zimtir/NodeScreenshoter.git
+2. npm install puppeteer
+3. node screenshoter.js
 
 
 By Marat Zimnurov
