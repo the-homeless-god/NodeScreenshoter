@@ -10,6 +10,7 @@ Executing :
 
 1. Git clone
 2. Npm install puppeteer
+3. Node screenshoter.js
 
 
 By Marat Zimnurov
