@@ -10,7 +10,8 @@ Executing :
 
 1. git clone https://github.com/Zimtir/NodeScreenshoter.git
 2. npm install puppeteer
-3. node screenshoter.js
+3. change const 'siteUrl' inside 'screenshoter.js' file
+4. node screenshoter.js
 
 
 By Marat Zimnurov
