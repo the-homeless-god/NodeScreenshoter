@@ -1,5 +1,11 @@
 const puppeteer = require('puppeteer');
 const siteUrl = 'http://example.com';
+const fs = require('fs');
+var dir = './screens';
+
+if (!fs.existsSync(dir)){
+    fs.mkdirSync(dir);
+}
 
 console.log('start for', siteUrl);
 
