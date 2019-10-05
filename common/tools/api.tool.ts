@@ -8,6 +8,8 @@ export default {
   generate: async (site: string, selector: string) => {
     var headers = createPostHeaders({ site: site, selector: selector })
 
-    await fetch(api.generate, headers)
+    const fetchResult = await fetch(api.generate, headers)
+    const fetchResponse = await fetchResult.json()
+    return fetchResponse
   }
 }

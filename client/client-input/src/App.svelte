@@ -1,10 +1,12 @@
 ﻿<script>
-  import Api from '../../../common/tools/api.tool.ts'
+  import Api from '../../../common/tools/api.tool'
 
   let siteUrl = ''
   let selector = ''
+  let parseResult = ''
+
   const parseSite = async () => {
-    await Api.generate(siteUrl, selector)
+    parseResult = await Api.generate(siteUrl, selector)
   }
 </script>
 
@@ -25,3 +27,5 @@
 <input class="btn" bind:value={siteUrl} placeholder="Site url" />
 <input class="btn" bind:value={selector} placeholder="Selector" />
 <button on:click={parseSite} class="btn">></button>
+
+{@html parseResult}

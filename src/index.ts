@@ -24,9 +24,15 @@ app.post('/generate', async (req: express.Request, res: express.Response) => {
   )
   const boxElems = await screenshoter.parse()
 
-  res.render('boxes.hbs', {
-    boxElems: boxElems
-  })
+  res.render(
+    'boxes.hbs',
+    {
+      boxElems: boxElems
+    },
+    (err, html) => {
+      res.json(html)
+    }
+  )
 })
 
 app.get('/', (req: express.Request, res: express.Response) => {
