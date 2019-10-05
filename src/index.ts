@@ -1,10 +1,38 @@
+import express from 'express'
+import bodyParser from 'body-parser'
 import fs from 'fs'
-import { Screenshoter } from './classes/screenshoter.class'
+import { Screenshoter } from '../src//classes/screenshoter.class'
 
-;async () => {
-  const outputFolder = 'screens/'
-  const siteUrl = 'http://google.com'
+var app = express()
+var outputDir = 'public/assets/img'
 
-  const screenshoter = new Screenshoter(fs, outputFolder, siteUrl)
-  await screenshoter.parse()
-}
+app.use(bodyParser.json())
+
+app.set('view engine', 'hbs')
+app.use(express.static('public'))
+var port = 3000
+
+app.post('/generate', async (req: express.Request, res: express.Response) => {
+  const { site, selector } = req.body
+  const screenshoter = new Screenshoter(
+    fs,
+    outputDir,
+    site,
+    true,
+    true,
+    selector
+  )
+  const boxElems = await screenshoter.parse()
+
+  res.render('boxes.hbs', {
+    boxElems: boxElems
+  })
+})
+
+app.get('/', (req: express.Request, res: express.Response) => {
+  res.render('input.hbs')
+})
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`)
+})
