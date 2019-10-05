@@ -1,5 +1,6 @@
 # NodeScreenshoter
-Tool for take screenshot of each visible node on webpage
+
+Tool for take screenshot of each visible DOM-node on webpage
 
 Requirements :
 
@@ -10,9 +11,7 @@ Executing :
 
 1. git clone https://github.com/Zimtir/NodeScreenshoter.git
 2. cd NodeScreenshoter
-3. npm install puppeteer
-4. change const 'siteUrl' inside 'screenshoter.js' file
-5. node screenshoter.js
-6. check your result inside 'screens' folder
+3. npm install
+4. check the example at index.ts
 
 By Marat Zimnurov
