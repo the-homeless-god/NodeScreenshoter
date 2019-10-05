@@ -12,6 +12,8 @@ Executing :
 1. git clone https://github.com/Zimtir/NodeScreenshoter.git
 2. cd NodeScreenshoter
 3. npm install
-4. check the example at index.ts
+4. check the examples at ./examples
+5. start server : npm run dev
+6. start client-input svelte : npm run dev-c-input
 
 By Marat Zimnurov
