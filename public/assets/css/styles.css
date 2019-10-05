@@ -1,27 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Alegreya+Sans:900');
 body {
-  align-items: center;
   display: flex;
-  height: 100vh;
   justify-content: center;
   font-family: sans-serif;
-  margin: 0;
   background: #6d6027;
   background: -webkit-linear-gradient(left, #d3cbb8, coral);
   background: -o-linear-gradient(left, #d3cbb8, coral);
   background: linear-gradient(to right, #d3cbb8, coral);
 }
-@media (max-width: 767px) {
-  body {
-    display: block;
-  }
-}
 .card {
   background: white;
   border-radius: 8px;
+  height: max-content;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   cursor: pointer;
-  height: 300px;
   margin: 20px;
   padding: 0 20px;
   position: relative;
@@ -33,10 +25,7 @@ body {
 
 .container {
   display: flex;
-  position: absolute;
   flex-wrap: wrap;
-  left: 0;
-  top: 0;
 }
 
 .card-img {
@@ -58,9 +47,6 @@ body {
     left: calc(50% - 20px);
     transform: translateX(-50%);
   }
-}
-.card.expanded {
-  height: 400px;
 }
 .label {
   margin-top: 30px;
