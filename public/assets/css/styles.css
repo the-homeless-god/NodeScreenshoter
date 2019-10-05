@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css?family=Alegreya+Sans:900');
+body {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  font-family: sans-serif;
+  margin: 0;
+  background: #6d6027;
+  background: -webkit-linear-gradient(left, #d3cbb8, coral);
+  background: -o-linear-gradient(left, #d3cbb8, coral);
+  background: linear-gradient(to right, #d3cbb8, coral);
+}
+@media (max-width: 767px) {
+  body {
+    display: block;
+  }
+}
+.card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  cursor: pointer;
+  height: 300px;
+  margin: 20px;
+  padding: 0 20px;
+  position: relative;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.025);
+  text-align: center;
+  transition: height 1000ms;
+  width: 260px;
+}
+
+.container {
+  display: flex;
+  position: absolute;
+  flex-wrap: wrap;
+  left: 0;
+  top: 0;
+}
+
+.card-img {
+  padding: 10%;
+  width: 80%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-img img {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+@media (max-width: 767px) {
+  .card {
+    left: calc(50% - 20px);
+    transform: translateX(-50%);
+  }
+}
+.card.expanded {
+  height: 400px;
+}
+.label {
+  margin-top: 30px;
+  transform: translateY(10px);
+  transition: transform 1000ms;
+}
+.card.expanded .label {
+  transform: translateY(0);
+}
+.text {
+  clip-path: polygon(0% 100%, 0 -90%, 50% -5%, 100% -90%, 100% 100%);
+  -webkit-clip-path: polygon(0% 100%, 0 -90%, 50% -5%, 100% -90%, 100% 100%);
+  transition: clip-path 1000ms;
+}
+.card.expanded .text {
+  clip-path: polygon(0% 100%, 0 -100%, 50% -15%, 100% -100%, 100% 100%);
+  -webkit-clip-path: polygon(0% 100%, 0 -100%, 50% -15%, 100% -100%, 100% 100%);
+}
+.text-content {
+  transform: translateY(-160px);
+  transition: transform 1000ms;
+}
+.card.expanded .text-content {
+  transform: translateY(-15px);
+}
+.chevron {
+  position: absolute;
+  bottom: 20px;
+  left: calc(50% - 15px);
+  transform-origin: 50%;
+  transform: rotate(180deg);
+  transition: transform 1000ms;
+}
+.card.expanded .chevron {
+  transform: rotate(0deg);
+}
+.title {
+  font-family: 'Alegreya Sans', sans-serif;
+  font-weight: 900;
+  margin: 20px 0 12px;
+}
+.body-text {
+  padding: 0 20px;
+}
