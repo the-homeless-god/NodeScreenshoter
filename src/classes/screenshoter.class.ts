@@ -10,22 +10,25 @@ export class Screenshoter {
   fs: any
   isOutputValidated: boolean
   isLogEnabled: boolean
+  selector: string
 
   constructor(
     fs: any,
     outputPath: string,
     url: string,
-    isOutputValidated: boolean = false,
-    isLogEnabled: boolean = false
+    isOutputValidated: boolean = true,
+    isLogEnabled: boolean = true,
+    selector: string = '*'
   ) {
     this.fs = fs
     this.outputPath = outputPath
     this.url = url
     this.isOutputValidated = isOutputValidated
     this.isLogEnabled = isLogEnabled
+    this.selector = selector
   }
 
-  public parse = async () => {
+  public parse = async (): Promise<Box[]> => {
     // check thath folder exists or create
     if (this.isOutputValidated) this.checkOrCreateOutput()
 
@@ -36,12 +39,14 @@ export class Screenshoter {
     const page = await this.getPage(browser)
 
     // get all page elements - same as document.querySelectorAll('*')
-    const elements = await page.$$('*')
-    await this.screenshotElements(elements)
+    const elements = await page.$$(this.selector)
+    const output = await this.screenshotElements(elements)
 
     this.log(Log.count, elements.length)
 
     await browser.close()
+
+    return output
   }
 
   private checkOrCreateOutput = () => {
@@ -50,7 +55,7 @@ export class Screenshoter {
 
   private log = (type: Log, param: string = '') => {
     if (this.isLogEnabled) {
-      console.log(`${Log[type]}: ${param}`)
+      console.log(`${type}: ${param}`)
     }
   }
 
@@ -74,20 +79,26 @@ export class Screenshoter {
     return page
   }
 
-  private screenshotElements = async (elements: any[]) => {
+  private screenshotElements = async (elements: any[]): Promise<Box[]> => {
     var done = 0
     var hidden = 0
+    var output: Box[] = []
 
     for (let i = 0; i < elements.length; i++) {
       try {
         const box = await elements[i].boundingBox()
 
         if (new Box(box || Box.generateBox()).isValidated) {
+          const outputBox = new Box(box)
+          outputBox.path = `${('0000' + i).slice(-5)}.png`
+
           await elements[i].screenshot({
-            path: `${this.outputPath}/${('0000' + i).slice(-5)}.png`
+            path: `${this.outputPath}/${outputBox.path}`
           })
 
           done++
+
+          output.push(outputBox)
         } else hidden++
       } catch (e) {
         this.log(Log.error, e)
@@ -98,5 +109,7 @@ export class Screenshoter {
     this.log(Log.done, done.toString())
     this.log(Log.hidden, hidden.toString())
     this.log(Log.end)
+
+    return output
   }
 }

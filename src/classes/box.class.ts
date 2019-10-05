@@ -3,6 +3,7 @@ export default class Box {
   height: number
   x: number
   y: number
+  path?: string
 
   constructor(box: Box) {
     this.height = box.height
