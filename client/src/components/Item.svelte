@@ -22,7 +22,7 @@
   }
 </script>
 
-<div on:click={expand} class:expand={isExpanded} class="card">
+<div on:click={expand} class:expanded={isExpanded} class="card">
   <div on:click={show} class="card-img">
     <Image src={getImgSrc()} />
   </div>

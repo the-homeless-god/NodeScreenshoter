@@ -86,16 +86,6 @@ export const checkParams = (res: any, params: any[]) => {
   return output
 }
 
-export function sendStatus(promise: any, res: any) {
-  promise
-    .then((r: any) => {
-      console.log(r)
-
-      res.send(JSON.stringify(r))
-    })
-    .catch((err: any) => {
-      console.log('error at send status')
-      log(err)
-      res.sendStatus(503)
-    })
+export function sendStatus(callback: any, res: any) {
+  res.send(callback)
 }
