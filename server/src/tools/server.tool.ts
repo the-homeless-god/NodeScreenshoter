@@ -1,12 +1,8 @@
 import { log, isNonEmptyList } from '../../../common/tools/common.tool'
-
+import { setupGraphql } from './graphql.tool'
 import cors from 'cors'
 import morgan from 'morgan'
 import express from 'express'
-
-import graphqlHTTP from 'express-graphql'
-import { buildSchema } from 'graphql'
-import Box from '../../../common/classes/box.class'
 
 export const normalizePort = (val: string) => {
   var port = parseInt(val, 10)
@@ -23,31 +19,11 @@ export const normalizePort = (val: string) => {
 }
 
 export const initModules = (app: any) => {
-  //! move it
-  // Construct a schema, using GraphQL schema language
-  var schema = buildSchema(`
-    ${Box.getGraphSchema()}
-  `)
-
-  // The root provides a resolver function for each API endpoint
-  var root = {
-    hello: () => {
-      return 'Hello world!'
-    }
-  }
-
   app.use(morgan('combined'))
   app.use(cors())
   app.use(express.static('public'))
 
-  app.use(
-    '/graphql',
-    graphqlHTTP({
-      schema: schema,
-      rootValue: root,
-      graphiql: true
-    })
-  )
+  setupGraphql(app)
 }
 
 export const handleAppErrors = (app: any) => {
