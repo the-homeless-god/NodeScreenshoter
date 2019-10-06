@@ -1,6 +1,6 @@
 {
   "name": "dom-screenshoter",
-  "version": "2.1.0",
+  "version": "0.0.5",
   "description": "Tool for take screenshot of each visible node on webpage",
   "main": "server/src/index.ts",
   "scripts": {
