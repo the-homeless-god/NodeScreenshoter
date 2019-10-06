@@ -17,9 +17,11 @@ export default class MainRouter {
   }
 
   generate = async (req: express.Request, res: express.Response) => {
+    console.log(req.body)
+    console.log(req.params)
     const { site, selector } = req.body
 
-    if (checkParams(res, [req.body.text, req.body.post])) {
+    if (checkParams(res, [site, selector])) {
       sendStatus(
         await new Screenshoter(
           fs,

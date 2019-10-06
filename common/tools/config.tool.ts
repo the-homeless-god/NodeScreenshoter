@@ -22,7 +22,7 @@ class AppConfiguration {
     host: process.env.DB_HOST,
     name: process.env.DB_NAME,
     user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
+    password: process.env.DB_PASS,
     options: {
       charset: process.env.DB_CHARSET,
       collate: process.env.DB_COLLATE

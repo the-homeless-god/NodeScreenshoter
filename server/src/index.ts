@@ -5,6 +5,8 @@ import AppConfiguration from '../../common/tools/config.tool'
 var configuration = AppConfiguration.getInstance()
 
 import { createServer } from 'http'
+import bodyParser from 'body-parser'
+
 import {
   initModules,
   normalizePort,
@@ -20,6 +22,8 @@ const port = normalizePort(configuration.port || '3000')
 
 app.set('port', port)
 
+app.use(bodyParser.json())
+
 app.use('/', router)
 
 console.log(all_routes(app))
@@ -31,7 +35,3 @@ var server = createServer(app)
 handleServerErrors(server)
 
 server.listen(port)
-
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`)
-})

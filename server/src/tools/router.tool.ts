@@ -20,21 +20,21 @@ const setupRoute = (route: Route) => {
   if (route.enabled) {
     log(route.path)
 
-    var selectedRouter
     switch (route.type) {
       case RequestEnum.get:
-        selectedRouter = router.get
+        router.get(route.path, (req: any, res: any) => {
+          log(route)
+          route.routeCallback(req, res, route.option)
+        })
         break
 
       case RequestEnum.post:
-        selectedRouter = router.post
+        router.post(route.path, (req: any, res: any) => {
+          log(route)
+          route.routeCallback(req, res, route.option)
+        })
         break
     }
-
-    selectedRouter(route.path, (req: any, res: any) => {
-      log(route)
-      route.routeCallback(req, res, route.option)
-    })
   }
 }
 

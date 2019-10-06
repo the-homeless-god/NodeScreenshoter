@@ -38,7 +38,6 @@ export const initModules = (app: any) => {
 
   app.use(morgan('combined'))
   app.use(cors())
-
   app.use(express.static('public'))
 
   app.use(
