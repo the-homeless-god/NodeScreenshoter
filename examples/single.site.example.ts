@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { Screenshoter } from '../src//classes/screenshoter.class'
+import { Screenshoter } from '../server/src/classes/screenshoter.class'
 
 export const getSingleSiteScreens = async (
   outputFolder: string = 'screens/',

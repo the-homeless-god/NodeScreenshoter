@@ -1,8 +1,9 @@
 import puppeteer from 'puppeteer'
 
-import Log from '../enums/log.enum'
-import Box from './box.class'
-import { Dictionary } from '../tools/dictionary'
+import Log from '../../../common/enums/log.enum'
+import Box from '../../../common/classes/box.class'
+import { Dictionary } from '../tools/dictionary.tool'
+import Common from '../../../common/tools/common.tool'
 
 export class Screenshoter {
   url: string
@@ -29,9 +30,6 @@ export class Screenshoter {
   }
 
   public parse = async (): Promise<Box[]> => {
-    // check thath folder exists or create
-    if (this.isOutputValidated) this.checkOrCreateOutput()
-
     this.log(Log.start, this.url)
 
     const browser = await this.launchBrowser()
@@ -49,8 +47,8 @@ export class Screenshoter {
     return output
   }
 
-  private checkOrCreateOutput = () => {
-    if (!this.fs.existsSync(this.outputPath)) this.fs.mkdirSync(this.outputPath)
+  private checkOrCreateOutput = (path: string) => {
+    if (!this.fs.existsSync(path)) this.fs.mkdirSync(path)
   }
 
   private log = (type: Log, param: string = '') => {
@@ -90,7 +88,14 @@ export class Screenshoter {
 
         if (new Box(box || Box.generateBox()).isValidated) {
           const outputBox = new Box(box)
-          outputBox.path = `${('0000' + i).slice(-5)}.png`
+          outputBox.path = `${Common.hash(this.url)}/${('0000' + i).slice(
+            -5
+          )}.png`
+
+          let path = `${this.outputPath}/${Common.hash(this.url)}`
+
+          // check thath folder exists or create
+          if (this.isOutputValidated) this.checkOrCreateOutput(path)
 
           await elements[i].screenshot({
             path: `${this.outputPath}/${outputBox.path}`
