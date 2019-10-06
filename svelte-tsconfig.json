@@ -1,5 +1,5 @@
 {
-  "include": ["src/**/*"],
+  "include": ["client/**/*", "common/**/*"],
   "exclude": ["node_modules/*"],
   "compilerOptions": {
     "target": "ESNEXT",

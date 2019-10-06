@@ -21,12 +21,12 @@ const opts = {
 }
 
 export default {
-  input: `client/${widget}/src/index.ts`,
+  input: `client/src/index.ts`,
   output: {
     sourcemap: true,
     format: 'iife',
     name: 'app',
-    file: `public/assets/js/${widget}.js`
+    file: `public/assets/js/client.js`
   },
   plugins: [
     svelte({
@@ -40,6 +40,6 @@ export default {
     production && terser()
   ],
   watch: {
-    clearScreen: false
+    clearScreen: true
   }
 }
