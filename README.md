@@ -25,3 +25,8 @@ npm run screen
 #### check your result inside 'screens' folder
 
 By Marat Zimnurov
+
+## TODO
+
+- passing of site url through shell-command instead file-rewriting
+- examples of results with screenshots inside README.md
