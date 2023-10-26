@@ -4,7 +4,7 @@
   "description": "A Node.js tool for capturing screenshots of visible elements on web pages using Puppeteer.",
   "main": "screenshoter.js",
   "scripts": {
-    "screen": "node screenshoter.js"
+    "start": "node screenshoter.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/the-homeless-god/NodeScreenshoter#readme",
   "dependencies": {
-    "puppeteer": "^3.0.1"
+    "puppeteer": "^21.4.1"
+  },
+  "engines": {
+    "node": ">=v20.6.1"
   }
 }

@@ -2,31 +2,21 @@
 
 Tool for take screenshot of each visible node on webpage
 
-## Minimal requirements :
+## Development:
 
-1. Node v8.11.1
-2. Npm v5.6.0
-3. Chrome
+1. Install modules
 
-## Executing :
+    ```shell
+    npm ci
+    ```
 
-```shell
-git clone https://github.com/the-homeless-god/NodeScreenshoter.git
-cd NodeScreenshoter
-npm install
-```
-
-#### change constant 'siteUrl' inside 'screenshoter.js' file
+2. Start
 
 ```shell
-npm run screen
+URL=https://google.com OUTPUT_DIR=./screens npm run start
 ```
 
-#### check your result inside 'screens' folder
+3. Check your result inside 'screens' folder
 
 By Marat Zimnurov
 
-## TODO
-
-- passing of site url through shell-command instead file-rewriting
-- examples of results with screenshots inside README.md
