@@ -2,6 +2,8 @@
 
 Tool for take screenshot of each visible node on webpage
 
+<img width="1440" alt="image" src="https://github.com/the-homeless-god/NodeScreenshoter/assets/32175240/eabb6b9f-b3a9-47da-9571-a53f772b5c0f">
+
 ## Development:
 
 1. Install modules
