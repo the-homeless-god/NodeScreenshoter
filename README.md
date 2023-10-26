@@ -11,7 +11,7 @@ Tool for take screenshot of each visible node on webpage
 ## Executing :
 
 ```shell
-git clone https://github.com/Zimtir/NodeScreenshoter.git
+git clone https://github.com/the-homeless-god/NodeScreenshoter.git
 cd NodeScreenshoter
 npm install
 ```

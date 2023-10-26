@@ -1,21 +1,21 @@
 {
   "name": "dom-screenshoter",
   "version": "1.0.0",
-  "description": "Tool for take screenshot of each visible node on webpage",
+  "description": "A Node.js tool for capturing screenshots of visible elements on web pages using Puppeteer.",
   "main": "screenshoter.js",
   "scripts": {
     "screen": "node screenshoter.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Zimtir/NodeScreenshoter.git"
+    "url": "git+https://github.com/the-homeless-god/NodeScreenshoter.git"
   },
   "author": "Marat Zimnurov (zimtir@mail.ru)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Zimtir/NodeScreenshoter/issues"
+    "url": "https://github.com/the-homeless-god/NodeScreenshoter/issues"
   },
-  "homepage": "https://github.com/Zimtir/NodeScreenshoter#readme",
+  "homepage": "https://github.com/the-homeless-god/NodeScreenshoter#readme",
   "dependencies": {
     "puppeteer": "^3.0.1"
   }
