@@ -1,87 +1,78 @@
-// References to external libraries
-// puppeteer - headless browser based on Chromium
-// fs - file storage manager
-const puppeteer = require('puppeteer')
-const fs = require('fs')
+const puppeteer = require('puppeteer');
+const fs = require('fs').promises; // Use fs.promises for modern async file operations
 
-// Configuration of screenshoter
-// siteUrl - site that you want to parse
-// dir - the output directory that will contains screenshots
-const siteUrl = 'http://example.com'
-const dir = './screens'
+const siteUrl = 'http://example.com';
+const outputDir = './screens';
 
-// Checking that directory exist else will create by path
-if (!fs.existsSync(dir)) {
-  fs.mkdirSync(dir)
-}
-
-// Helper-function to check that element contain empty axises such as X or Y
-const isEmptyAxises = (box) => {
-  return !box.x || !box.y
-}
-
-// Helper-function to check that element contain empty sizes such as width or height
-const isEmptySizes = (box) => {
-  return !box.width || box.width === 0 || !box.height || box.height === 0
-}
-
-// Log before start
-console.log('start for', siteUrl)
-
-// Self-executed async function
-;(async () => {
-  // Make a new Chrome window
-  const browser = await puppeteer.launch({
-    headless: false,
-    args: ['--hide-scrollbars', '--mute-audio', '--disable-gpu'],
-  })
-
-  // Make a new Chrome page
-  const page = await browser.newPage()
-
-  // Navigate to site url from configuration
-  await page.goto(siteUrl, { waitUntil: 'load' })
-
-  // Get a list of all elements - same as document.querySelectorAll('*')
-  const elements = await page.$$('*')
-
-  // Log about nodes count at page
-  console.log('count of nodes: ', elements.length)
-
-  // Count of parsed and non-parsed nodes
-  let done = 0
-  let hidden = 0
-
-  // Loop through all elements on page
-  for (let i = 0; i < elements.length; i++) {
-    try {
-      // Getting of sizes of element before parse
-      const box = await elements[i].boundingBox()
-
-      // This checking means that user can't see element on page
-      if (!box || isEmptyAxises(box) || isEmptySizes(box)) {
-        // Increase hidden-counter
-        hidden++
-      } else {
-        // Make a screenshot and place to output directory
-        await elements[i].screenshot({
-          path: `screens/${('0000' + i).slice(-5)}.png`,
-        })
-
-        // Increase done-counter
-        done++
-      }
-    } catch (e) {
-      // Increase hidden-counter
-      hidden++
-    }
+// Function to create the output directory if it doesn't exist
+async function createOutputDirectory() {
+  try {
+    await fs.mkdir(outputDir, { recursive: true });
+  } catch (error) {
+    console.error(`Error creating output directory: ${error}`);
   }
+}
 
-  // Log about end with statistic
-  console.log('done: ', done)
-  console.log('hidden:', hidden)
-  console.log('end')
+// Function to check if a bounding box is empty
+function isBoundingBoxEmpty(box) {
+  return !box || box.x === 0 || box.y === 0 || box.width === 0 || box.height === 0;
+}
 
-  // Close instance of Chrome
-  await browser.close()
-})()
+// Self-executed async function for the main logic
+(async () => {
+  try {
+    // Create a new Chrome window
+    const browser = await puppeteer.launch({
+      headless: false,
+      args: ['--hide-scrollbars', '--mute-audio', '--disable-gpu'],
+    });
+
+    // Create a new Chrome page
+    const page = await browser.newPage();
+
+    // Navigate to the specified site URL
+    await page.goto(siteUrl, { waitUntil: 'load' });
+
+    // Get a list of all elements on the page
+    const elements = await page.$$('*');
+
+    // Log the count of nodes on the page
+    console.log('Count of nodes:', elements.length);
+
+    // Initialize counters for parsed and non-parsed nodes
+    let parsedCount = 0;
+    let hiddenCount = 0;
+
+    // Loop through all elements on the page
+    for (let i = 0; i < elements.length; i++) {
+      try {
+        // Get the bounding box of the element before parsing
+        const box = await elements[i].boundingBox();
+
+        // Check if the element is hidden
+        if (isBoundingBoxEmpty(box)) {
+          hiddenCount++;
+        } else {
+          // Make a screenshot and save it to the output directory
+          await elements[i].screenshot({
+            path: `${outputDir}/${('0000' + i).slice(-5)}.png`,
+          });
+
+          parsedCount++;
+        }
+      } catch (e) {
+        hiddenCount++;
+      }
+    }
+
+    // Log statistics at the end
+    console.log('Parsed elements:', parsedCount);
+    console.log('Hidden elements:', hiddenCount);
+    console.log('Execution completed');
+
+    // Close the Chrome instance
+    await browser.close();
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
+})();
